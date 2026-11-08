@@ -69,7 +69,9 @@ Study:
 - Motion, transitions, and interaction details.
 - Responsive behavior.
 
-Select references for specific reasons. Explain internally what is useful about each reference and how the idea could be adapted to the current project. Do not reproduce another site's distinctive design wholesale.
+Select references for specific reasons. Do not reproduce another site's distinctive design wholesale.
+
+**Required research output:** Before implementing, produce a small **reference-comparison table** with columns `Reference (URL)`, `Observed`, `Adapted`, and `Why`. Usually include 2–4 genuinely inspected references. Explain exactly which idea is useful, how it will be transformed for this brand, and why. Distinguish direct observations from assumptions. If browsing is unavailable, write "No external reference verified" and make a brief table based only on locally accessible project examples, explicitly labeling them as such. Follow [design research](references/design-research.md).
 
 If external browsing is unavailable, do not claim to have inspected these galleries. Work from available project context and state the limitation when relevant.
 
@@ -89,6 +91,8 @@ Define:
 - The relationship between brand expression and usability.
 
 Use the existing identity as a starting point for redesigns. Preserve recognizable brand elements when they remain effective, but improve weak or inconsistent execution.
+
+Record a concise creative-direction brief before implementation: audience, primary task/conversion, tone, visual concept, typography, color, layout, imagery, and motion. Use it to critique the rendered result. For typography—including font loading, fluid type scales, readable line lengths, localization, and RTL layouts—consult [typography](references/typography.md).
 
 Avoid defaulting to:
 - Generic SaaS landing-page structures.
@@ -111,6 +115,7 @@ Map the page or site structure before building.
 - Give each section a distinct purpose.
 - Use visual variation without losing coherence.
 - Keep calls to action clear and appropriately placed.
+- Specify normal, empty, loading, error, success, and form-validation states for key journeys; use actionable, truthful microcopy. See [content design](references/content-design.md).
 - Preserve important existing routes, content, integrations, and user journeys in redesigns.
 
 Do not add sections simply to make a page longer. Do not remove useful content merely to achieve minimalism.
@@ -122,12 +127,12 @@ Work directly in the existing codebase unless the user requests a separate proto
 - Follow the project's framework, conventions, and package manager.
 - Reuse and improve existing components where sensible.
 - Create reusable components and design tokens for repeated patterns.
-- Use semantic HTML and accessible interaction patterns.
+- Use semantic HTML and accessible interaction patterns. Explicitly test keyboard navigation, visible focus, text/non-text contrast, accessible forms, and screen-reader behavior using [accessibility](references/accessibility.md).
 - Use real project assets where available; do not invent testimonials, customer logos, statistics, awards, or product capabilities.
 - Choose dependencies deliberately and avoid unnecessary packages.
 - Ensure links, buttons, forms, menus, and other controls perform their intended actions.
 - Keep responsive behavior intentional rather than merely shrinking desktop layouts.
-- Optimize images, fonts, and loading behavior.
+- Optimize images, fonts, and loading behavior. Verify loading behavior and correct font shaping for every supported language, including RTL scripts.
 
 Do not replace a working application with a static mockup. Do not claim an integration or interaction works unless it has been implemented and tested.
 
@@ -194,6 +199,8 @@ When tools and environment permit:
 
 If browser inspection or a particular test is unavailable, say so rather than claiming it passed.
 
+Use the repeatable evaluation plan in [testing and QA](references/testing-and-qa.md). For the skill repository itself, run `python3 scripts/check_skill.py` to validate documentation contracts; this cannot replace functional or browser QA of a generated website.
+
 ## Definition of done
 
 A project is ready when:
@@ -218,5 +225,7 @@ Summarize:
 - Pages or components updated.
 - Tests actually performed.
 - Any remaining issues or limitations.
+- The reference-comparison table and which sources were actually inspected.
+- Accessibility and interface-state tests actually performed, and any checks left unverified.
 
 Do not claim award-worthiness, perfect quality, or successful testing without evidence.
