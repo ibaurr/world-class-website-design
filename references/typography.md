@@ -11,7 +11,7 @@ Use this when selecting, implementing, or reviewing type systems. Typography mus
 - Prefer a variable font when it reduces the total font payload; request only the axes and ranges actually used. Be cautious with large variable fonts and multilingual subsets.
 - Check that bold, italic, numerals, punctuation, and form controls render correctly in the chosen fallback fonts.
 
-## Responsive type scales
+## Responsive type scales and line length
 
 - Define semantic typography tokens for display, heading, body, small text, captions, and controls. Reuse them instead of assigning unrelated sizes per section.
 - Use `rem` for base sizing and accessible user scaling. `clamp()` can create fluid headings, but set readable minimums and reasonable maximums; do not prevent browser zoom.
