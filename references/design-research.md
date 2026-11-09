@@ -39,3 +39,15 @@ For each useful reference, consider:
 ## Research integrity
 
 Do not claim to have visited or inspected a page if browser access was unavailable. Search snippets and thumbnails are not equivalent to inspecting the live experience. Do not reproduce copyrighted assets or distinctive site designs wholesale.
+
+## Required reference-comparison table
+
+Before writing a new design or implementing a redesign, report a compact table based on 2–4 references actually inspected. Do not turn this into a long inspiration dump. The table must explicitly distinguish evidence, adaptation, and rationale.
+
+| Reference (URL) | Observed | Adapted | Why |
+| --- | --- | --- | --- |
+| Actual visited source | Specific typography, composition, navigation, or interaction observed | The distinct implementation idea for this project (not a clone) | How it supports the audience, task, and brand |
+
+For each row, use a working reference URL where available. Avoid vague praise such as "modern" or "clean"; describe observable attributes. Never present guessed interactions as if tested.
+
+**When browsing is unavailable:** State "No external reference verified". Use local screenshots, existing pages, or supplied materials if present, label them as local/brief-supplied, and never fabricate external browsing. If there are no usable references, say so and proceed from the project brief.
