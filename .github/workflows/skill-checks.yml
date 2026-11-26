@@ -18,3 +18,5 @@ jobs:
           python-version: '3.12'
       - name: Validate skill structure and documented quality checks
         run: python3 scripts/check_skill.py
+      - name: Unit-test the site teardown script (offline, no browser)
+        run: python3 -m unittest discover -s scripts -p "test_*.py" -v

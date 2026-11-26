@@ -55,7 +55,7 @@ When browser access or web research is available, inspect a varied selection of 
 - https://www.lapa.ninja/
 - https://www.framer.com/startups/ycombinator
 
-Inspect actual pages and interactions where possible, not just thumbnails or search snippets.
+Inspect actual pages and interactions where possible, not just thumbnails or search snippets. When a shell and Python are available, measure each chosen reference with `python3 scripts/analyze_site.py <url> --out teardown/<name>`: it records the fonts, type scale, colors, spacing, CSS motion timing, detected libraries, and scroll-depth screenshots the page actually renders. Treat the numbers as evidence for the table, not as a spec to copy, and see [design research](references/design-research.md) for its limits.
 
 Study:
 - Art direction and brand expression.
@@ -93,6 +93,8 @@ Define:
 Use the existing identity as a starting point for redesigns. Preserve recognizable brand elements when they remain effective, but improve weak or inconsistent execution.
 
 Record a concise creative-direction brief before implementation: audience, primary task/conversion, tone, visual concept, typography, color, layout, imagery, and motion. Use it to critique the rendered result. For typography—including font loading, fluid type scales, readable line lengths, localization, and RTL layouts—consult [typography](references/typography.md).
+
+Also choose an **ambition level** (restrained, expressive, or experimental), state the **big idea** in one sentence, and, for expressive or experimental projects, specify one **signature moment**. Add all three to the brief and use them to judge the rendered result. Follow [creative ambition](references/creative-ambition.md); ambition never overrides accessibility, performance, or usable content.
 
 Avoid defaulting to:
 - Generic SaaS landing-page structures.
@@ -220,7 +222,7 @@ A project is ready when:
 
 Summarize:
 - What changed.
-- The creative direction and key design decisions.
+- The creative direction, ambition level, big idea, signature moment (if any), and key design decisions.
 - Important motion and scrolling behavior.
 - Pages or components updated.
 - Tests actually performed.
