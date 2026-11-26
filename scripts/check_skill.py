@@ -4,8 +4,10 @@
 This tests skill metadata and instruction coverage, not generated websites.
 """
 from pathlib import Path
+import py_compile
 import re
 import sys
+import tempfile
 
 ROOT = Path(__file__).resolve().parents[1]
 errors = []
@@ -32,6 +34,7 @@ typography = read("references/typography.md")
 accessibility = read("references/accessibility.md")
 content = read("references/content-design.md")
 testing = read("references/testing-and-qa.md")
+ambition = read("references/creative-ambition.md")
 read("references/design-principles.md")
 read("references/motion-and-scrolling.md")
 
@@ -44,11 +47,17 @@ for path in sorted(set(re.findall(r"references/[\w-]+\.md", skill))):
 require("SKILL.md", skill, [
     "reference-comparison table", "references/typography.md",
     "references/accessibility.md", "references/content-design.md",
-    "references/testing-and-qa.md",
+    "references/testing-and-qa.md", "references/creative-ambition.md",
+    "ambition level", "big idea", "signature moment", "scripts/analyze_site.py",
 ])
 require("Design research", research, [
     "| Reference", "| Observed", "| Adapted", "| Why",
-    "No external reference verified",
+    "No external reference verified", "scripts/analyze_site.py", "--reduced-motion",
+    "not measured",
+])
+require("Creative ambition", ambition, [
+    "restrained", "expressive", "experimental", "big idea", "signature moment",
+    "reduced motion", "mobile", "guardrails",
 ])
 require("Typography", typography, [
     "font-display", "woff2", "clamp()", "line length",
@@ -69,8 +78,20 @@ require("README", readme, [
     ".claude/skills/world-class-website-design",
     ".agents/skills/world-class-website-design",
     "python3 scripts/check_skill.py",
-    "verification",
+    "verification", "scripts/analyze_site.py", "unittest discover",
 ])
+
+# Every Python script must at least compile, and the teardown script must keep
+# its optional dependency lazy so this check and CI stay dependency-free.
+for script in sorted((ROOT / "scripts").glob("*.py")):
+    try:
+        with tempfile.TemporaryDirectory() as tmp:
+            py_compile.compile(str(script), cfile=str(Path(tmp) / "out.pyc"), doraise=True)
+    except py_compile.PyCompileError as exc:
+        errors.append(f"{script.name}: does not compile: {exc.msg}")
+analyze = read("scripts/analyze_site.py")
+if re.search(r"^(import|from)\s+playwright", analyze, re.M):
+    errors.append("scripts/analyze_site.py: playwright must be imported lazily inside capture()")
 if not (ROOT / ".github/workflows/skill-checks.yml").is_file():
     errors.append("Missing GitHub Actions regression workflow")
 

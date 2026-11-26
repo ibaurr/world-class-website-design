@@ -7,7 +7,8 @@ It gives compatible coding agents a repeatable process for understanding a proje
 ## What it covers
 
 - Design research with a **reference-comparison table** recording observations, adaptations, and rationale.
-- Brand-aware creative direction and an explicit design brief.
+- Brand-aware creative direction and an explicit design brief, with an ambition level, a one-sentence big idea, and a specified signature moment.
+- A site teardown script that measures real reference sites (type scale, colors, spacing, motion timing, libraries, screenshots) so research rests on evidence.
 - Typography: font loading, variable type scales, line length, multilingual scripts, and RTL layouts.
 - Accessibility: keyboard, visible focus, contrast, forms, screen-reader behavior, reflow, and reduced motion.
 - Meaningful content for empty, loading, error, validation, and success states.
@@ -83,15 +84,29 @@ world-class-website-design/
 │   ├── design-principles.md
 │   ├── motion-and-scrolling.md
 │   ├── design-research.md
+│   ├── creative-ambition.md
 │   ├── typography.md
 │   ├── accessibility.md
 │   ├── content-design.md
 │   └── testing-and-qa.md
 ├── scripts/
+│   ├── analyze_site.py
+│   ├── test_analyze_site.py
 │   └── check_skill.py
 └── .github/workflows/
     └── skill-checks.yml
 ```
+
+## Measuring reference sites
+
+The skill can measure a live reference instead of guessing from a screenshot. The script needs Playwright, which is optional and used only by this script:
+
+```bash
+pip install playwright && python3 -m playwright install chromium
+python3 scripts/analyze_site.py https://example.com --out teardown/example
+```
+
+It writes `teardown.md`, `teardown.json`, and scroll-depth screenshots. Add `--reduced-motion` to see the reduced-motion rendering, `--viewport 390x844` for mobile, and `--shots N` to change the screenshot count. The output is evidence for the reference-comparison table; it is not a spec to copy. See [design research](references/design-research.md) for what it can and cannot see.
 
 ## Testing and verification
 
@@ -99,9 +114,10 @@ Run the dependency-free repository contract test:
 
 ```bash
 python3 scripts/check_skill.py
+python3 -m unittest discover -s scripts -p "test_*.py"
 ```
 
-GitHub Actions runs the same check on pull requests and pushes to main. It validates the skill's metadata, reference links, research-table contract, key test cases, and installation documentation. It **does not** test actual rendered websites. For a website produced by the skill, use the browser/functional regression procedure in [testing and QA](references/testing-and-qa.md).
+The second command runs offline unit tests for the teardown script's analysis and report code; it needs neither a browser nor Playwright. GitHub Actions runs both checks on pull requests and pushes to main. The contract check validates the skill's metadata, reference links, research-table contract, key test cases, and installation documentation. Neither check tests actual rendered websites. For a website produced by the skill, use the browser/functional regression procedure in [testing and QA](references/testing-and-qa.md).
 
 ## Contributing
 

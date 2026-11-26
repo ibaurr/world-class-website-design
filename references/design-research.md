@@ -36,6 +36,29 @@ For each useful reference, consider:
 - Would that technique fit this project's audience and product?
 - How could it be adapted without imitation?
 
+## Measuring a reference
+
+Looking at a page tells you what it feels like; measuring it tells you what makes it feel that way. Use `scripts/analyze_site.py` to capture one rendered page:
+
+```bash
+pip install playwright && python3 -m playwright install chromium   # once
+python3 scripts/analyze_site.py https://example.com --out teardown/example
+python3 scripts/analyze_site.py https://example.com --out teardown/example-rm --reduced-motion
+```
+
+It writes `teardown.md`, `teardown.json`, and screenshots at successive scroll depths. The report covers the type scale and fonts, text and background colors, vertical rhythm and gaps, CSS transition timing and easing, detected libraries (GSAP, Lenis, Three.js, and others), WebGL canvases, and page structure.
+
+How to use the output:
+
+- Cite specific measurements in the `Observed` column (for example, "display type 96px, line height 0.95, tracking -0.03em"), and only what the report or your own viewing supports.
+- Open the screenshots and look at them. Numbers show the system; screenshots show whether it works.
+- Run once with `--reduced-motion` to see what the site does for users who ask for less motion.
+- The script is for one page load as a normal browser would make it. Run it only on pages you are entitled to view, and do not use it to harvest assets or copy.
+
+What it cannot see: motion defined in JavaScript (GSAP tweens, Lenis settings, shaders) appears only as a detected library and in screenshots, not as durations or easings. Cross-origin stylesheets are unreadable, so some CSS facts may be undercounted, and the report says so. Treat missing data as "not measured", never as "absent".
+
+If Playwright or a browser cannot be installed, fall back to manual inspection, and say that no measurement was taken.
+
 ## Research integrity
 
 Do not claim to have visited or inspected a page if browser access was unavailable. Search snippets and thumbnails are not equivalent to inspecting the live experience. Do not reproduce copyrighted assets or distinctive site designs wholesale.
